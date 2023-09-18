@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, reactive, watch } from 'vue';
+import { reactive } from 'vue';
 import Cabecalho from './components/Cabecalho.vue';
 import Formulario from './components/Formulario.vue';
 import ListaDeTarefas from './components/ListaDeTarefas.vue';
@@ -9,14 +9,6 @@ const estado = reactive({
   tarefaTemp: '',
   tarefas: []
 });
-
-onMounted(() => {
-  estado.tarefas.push(JSON.parse(localStorage.getItem('tarefas')))
-})
-
-watch(estado.tarefas, (novoItem) => {
-  localStorage.setItem('tarefas', JSON.stringify(estado.tarefas))
-})
 
 const getTarefaPendentes = () => {
   return estado.tarefas.filter(tarefa => !tarefa.finalizada)
